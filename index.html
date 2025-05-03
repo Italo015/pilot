@@ -1,51 +1,320 @@
 <!DOCTYPE html>
-<html lang="pt-br"
+<html lang="pt-BR">
 <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>projeto</title>
-    <link rel="stylesheet" href="style.css">
+    <title>">eu Espaço Digital</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --text-color: white;
+            --bg-url: url(./assets/bg-mobile.jpg);
+            --switch-bg-url: url(./assets/moon-stars.svg);
+            --surface-color: rgba(255, 255, 255, 0.1);
+            --stroke-color: rgba(255, 255, 255, 0.5);
+            --highlight-color: rgba(255, 255, 255, 0.2);
+            --transition-duration: 0.4s;
+            --primary-color: #3b82f6;
+            --primary-dark: #2563eb;
+        }
+
+        .light {
+            --text-color: #121212;
+            --bg-url: url(./assets/bg-mobile-light.jpg);
+            --switch-bg-url: url(./assets/sun.svg);
+            --surface-color: rgba(0, 0, 0, 0.05);
+            --stroke-color: rgba(0, 0, 0, 0.5);
+            --highlight-color: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: var(--bg-url) no-repeat top center/cover;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-color);
+            transition: background var(--transition-duration) ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid var(--stroke-color);
+            padding: 32px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            transition: all var(--transition-duration) ease;
+        }
+
+        /* Profile Section */
+        .profile {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .profile-img {
+            width: 112px;
+            height: 112px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+            margin: 0 auto 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        .profile h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .profile p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* Switch */
+        .switch-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 24px 0;
+        }
+
+        .switch {
+            position: relative;
+            width: 64px;
+            margin: 0 10px;
+        }
+
+        .switch button {
+            width: 32px;
+            height: 32px;
+            background: white var(--switch-bg-url) no-repeat center;
+            background-size: 20px;
+            border: 0;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            z-index: 1;
+            transform: translateY(-50%);
+            transition: left var(--transition-duration) ease;
+            cursor: pointer;
+        }
+
+        .light .switch button {
+            left: 32px;
+        }
+
+        .switch span {
+            display: block;
+            width: 64px;
+            height: 24px;
+            background: var(--surface-color);
+            border: 1px solid var(--stroke-color);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border-radius: 9999px;
+        }
+
+        /* Links Section */
+        .links {
+            margin: 24px 0;
+        }
+
+        .links ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .links li a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            background: var(--surface-color);
+            border: 1px solid var(--stroke-color);
+            border-radius: 8px;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            text-decoration: none;
+            font-weight: 500;
+            color: var(--text-color);
+            transition: all var(--transition-duration) ease;
+        }
+
+        .links li a:hover {
+            background: var(--highlight-color);
+            border: 1.5px solid var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .links li a i {
+            margin-right: 12px;
+            font-size: 20px;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--surface-color);
+            color: var(--text-color);
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--highlight-color);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 32px;
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .container {
+                padding: 24px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div id="container">
-        <div id="profile"> 
-             <img src="./assets/assets/avatar.png" alt="goldenx">
+    <div class="container">
+        <!-- Profile Section -->
+        <div class="profile">
+            <img src="./assets/veva.jpg" alt="GoldenX Avatar" class="profile-img">
+            <h1>Veva Artes</h1>
+            <p>Loja de Artesanato</p>
         </div>
-        <div id="switch" onclick="toggleMode()">
-            <button>
 
-            </button>
-            <span></span>)
+        <!-- Theme Switch -->
+        <div class="switch-container">
+            <i class="fas fa-sun"></i>
+            <div class="switch" onclick="toggleMode()">
+                <button></button>
+                <span></span>
+            </div>
+            <i class="fas fa-moon"></i>
         </div>
-        <ul>
-            <li>
-                <a href="#">LOJA ONLINE</a>
-            </li>
-            <li>
-                <a href="https://www.instagram.com/jubtgonzalez/">Rede Social</a>
-            </li>
-        </ul>
-        
-        <!-- Novo container para os ícones de redes sociais -->
-        <div id="social-links">
-            <a href="https://www.instagram.com/jubtgonzalez/" target="_blank">
-                <ion-icon name="logo-instagram"></ion-icon>
+
+        <!-- Links Section -->
+        <div class="links">
+            <ul>
+                <li>
+                    <a href="https://vevaartes.rededelojasdigitais.online/" target="_blank">
+                        <i class="fas fa-shopping-cart"></i>
+                        Loja Online
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.instagram.com/vevaaromass/" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                        Rede Social
+                    </a>
+                </li>
+                <li>
+                    <a href="https://api.whatsapp.com/send/?phone=5585999988963&text&type=phone_number&app_absent=0" target="_blank">
+                        <i class="fas fa-envelope"></i>
+                        Contato
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Social Links -->
+        <div class="social-links">
+            <a href="https://www.instagram.com/vevaaromass/" target="_blank" title="Instagram">
+                <i class="fab fa-instagram"></i>
             </a>
-            <a href="#">
-                <ion-icon name="logo-facebook"></ion-icon>
+            <a href="https://www.facebook.com/vevaaromass/" target="_blank" title="Facebook">
+                <i class="fab fa-facebook"></i>
             </a>
-            <a href="#">
-                <ion-icon name="logo-whatsapp"></ion-icon>
+            <a href="https://api.whatsapp.com/send/?phone=5585999988963&text&type=phone_number&app_absent=0" target="_blank" title="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
             </a>
         </div>
+
+        <!-- Footer -->
+        <footer>
+            © Veva Artes 2025 Todos os direitos reservados.
+        </footer>
     </div>
-    
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <script>
+        // Toggle dark/light mode
+        function toggleMode() {
+            const html = document.documentElement
+            const isLight = html.classList.toggle('light')
+            
+            // Save preference
+            localStorage.setItem('theme', isLight ? 'light' : 'dark')
+            
+            // Update button icon
+            updateSwitchIcon(isLight)
+        }
+
+        // Update switch icon based on theme
+        function updateSwitchIcon(isLight) {
+            const button = document.querySelector('.switch button')
+            if (isLight) {
+                button.style.backgroundImage = 'url(./assets/sun.svg)'
+            } else {
+                button.style.backgroundImage = 'url(./assets/moon-stars.svg)'
+            }
+        }
+
+        // Load saved theme preference
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme')
+            if (savedTheme) {
+                document.documentElement.classList.add(savedTheme)
+                updateSwitchIcon(savedTheme === 'light')
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadTheme()
+        })
+    </script>
 </body>
 </html>
-<script src="./script.js"></script>
